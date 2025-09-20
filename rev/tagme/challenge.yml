@@ -1,0 +1,14 @@
+name: tagme
+author: maxster
+description: |-
+  ```
+  tag, you're it!
+    g, you're it!tag
+  
+  Update: the flag does not contain the letter  'p'
+  ```
+provide:
+  - tagme
+sortWeight: 80
+flag:
+  file: flag.txt

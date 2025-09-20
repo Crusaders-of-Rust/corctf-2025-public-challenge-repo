@@ -1,0 +1,9 @@
+name: keys
+author: BrownieInMotion, defund
+description: |-
+  See attachments
+provide:
+  - file: encrypt.py
+  - file: flag-enc.bmp
+sortWeight: 100
+flag: corctf{642fcb29f091fb14}

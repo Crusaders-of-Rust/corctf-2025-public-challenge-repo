@@ -1,0 +1,39 @@
+name: pipes
+author: clubby
+description: |-
+  Try out my fun new maze game!
+
+  To connect, spawn an instance then run
+  ```
+  ssh -o StrictHostKeyChecking=no -o UserKnownHostsFile=/dev/null -o ProxyCommand='openssl s_client -connect <host>:1 -quiet' ctf@localhost -t /run.sh
+  ```
+  with password `ctf`.
+
+  [Instancer]({{ instancer }})
+sortWeight: 50
+flag:
+  file: flag.txt
+
+provide:
+  - src.tar.gz
+
+containers:
+  chall:
+    build: .
+    ports:
+      - 5000
+    resources:
+      limits:
+        memory: 200Mi
+        cpu: 300m
+      requests:
+        memory: 50Mi
+        cpu: 100m
+
+expose:
+  chall:
+    - target: 5000
+      tls: pipes
+
+instancer:
+  timeout: 600000

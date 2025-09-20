@@ -1,0 +1,37 @@
+name: msbug's revenge
+author: jazzpizazz
+description: |-
+  It seems like our previous version was overly vulnerable. We dumped our app into an LLM and asked it to improve our security.
+  It made all kinds of changes, but this sure as hell does not look vulnerable anymore :D
+
+  [Instancer]({{ instancer }})
+
+  Please inform our admins once you made a submission:
+  [Admin Bot]({{ adminbot }})
+
+sortWeight: 90
+adminbot: adminbot.js
+flag: corctf{1_me4n_html_1nj3cti0n_1s_4_ser1ous_pr0bl3m}
+provide:
+  - msbugrevenge.tar.gz
+
+containers:
+  app:
+    build: app
+    ports:
+      - 5000
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 500Mi
+
+expose:
+  app:
+    - target: 5000
+      http: msbugrevenge
+
+instancer:
+  timeout: 300000

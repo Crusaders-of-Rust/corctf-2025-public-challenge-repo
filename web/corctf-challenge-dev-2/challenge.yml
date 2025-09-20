@@ -1,0 +1,34 @@
+name: corctf-challenge-dev-2
+author: drakon
+description: |-
+  The Crusaders of Rust Online Challenge Development Portal is back and ~~better than ever~~ mostly unchanged! I didn't have time to update the website, since fizzbuzz101 ordered me to update his censorship extension.
+  
+  I rewrote the whole thing. Check it out!
+  
+  [Site](link removed)  
+  [Instancer]({{ instancer }})
+flag: corctf{l4ggy_s1d3ch4nn3l}
+provide:
+  - corctf-challenge-dev-2.tar.gz
+sortWeight: 64
+containers:
+  app:
+    build: extension_site
+    ports:
+      - 3000
+    environment:
+      ADMIN_PASSWORD: 18af8d6f5a98ddbe55d16540f174bc16
+    resources:
+      limits:
+        cpu: 1500m
+        memory: 5000Mi
+      requests:
+        cpu: 200m
+        memory: 500Mi
+    egress: true
+expose:
+  app:
+    - target: 3000
+      http: fizzblock-101
+instancer:
+  timeout: 900000

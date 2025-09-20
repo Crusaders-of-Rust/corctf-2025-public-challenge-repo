@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/awsm.min.css">
+    <title>Edit | FizzBlock101 Feed Configuration</title>
+</head>
+<body>
+	<%- include('header') %>
+  <h1>Editing <%= name %></h1>
+  <form id="feedForm">
+    <div>
+      <label for="banned-phrases">Banned phrases (as a JSON array):</label>
+      <textarea id="banned-phrases" name="banned-phrases" required><%= JSON.stringify(feed.banned_phrases) %></textarea>
+    </div>
+    <button type="submit">Edit</button>
+  </form>
+	<script nonce="<%= nonce %>">
+    document.getElementById('feedForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const feed = "<%= name%>";
+      const banned_phrases = event.target['banned-phrases'].value;
+      const response = await fetch('/api/update', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ feed, banned_phrases })
+      });
+      const result = await response.json();
+      if (result.success) {
+        window.location.href = '/feed/<%= name %>';
+      } else {
+        console.error('Error creating feed:', result.error);
+      }
+    });
+  </script>
+</body>
+</html>

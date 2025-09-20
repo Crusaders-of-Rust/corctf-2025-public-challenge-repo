@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/awsm.min.css">
+	<title>Feeds | FizzBlock101 Feed Configuration</title>
+</head>
+<body>
+	<%- include('header') %>
+	
+	<h2>Feeds</h2>
+	<ul id="feed-list"></ul>
+	<script nonce="<%= nonce %>">
+    document.addEventListener("DOMContentLoaded", async () => {
+      try {
+        const response = await fetch('/api/feeds', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          }
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+          const feedList = document.getElementById('feed-list');
+          result.data.forEach(feed => {
+            const listItem = document.createElement('li');
+            const feedLink = document.createElement('a');
+            feedLink.href = `/feed/${feed}`;
+            feedLink.textContent = feed;
+            listItem.appendChild(feedLink);
+            feedList.appendChild(listItem);
+          });
+        } else {
+          console.error(result.error);
+        }
+      } catch (error) {
+        console.error('Error fetching feeds:', error);
+      }
+    });
+  </script>
+</body>
+</html>

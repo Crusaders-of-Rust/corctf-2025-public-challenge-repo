@@ -1,0 +1,17 @@
+name: CorServices-Defender
+author: ryaagard
+description: |
+  After releasing our Analyzer we received a lot of malware samples to analyze, so it only made sense to start developing our own antivirus solution.
+
+  Defender will protect your Windows system from cyber threats and prevent malicious actors from stealing your ctf exploits. It's currently in active development so some features will be missing, but here at CorServices we are dedicated and (hard) at work to finish it as soon as possible.
+
+  Download a Windows VM image with Defender pre-installed [here](https://static.cor.team/2025/corservices-defender/defender_windows.tar)!
+
+  Credentials are: `coruser:corpassword`
+
+  [Instancer](https://boxman.ctfi.ng/corservices-defender)
+sortWeight: 38
+provide:
+  - defender.zip
+
+flag: corctf{lAy1nG_p1p3-1n_th3_k3rneL?}

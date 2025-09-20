@@ -1,0 +1,43 @@
+<!doctype html>
+<html>
+<head>
+    <title>MsBug - Report a Bug</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
+</head>
+<body class="bg-gray-100 text-gray-900 font-sans min-h-screen flex items-center justify-center">
+    <div class="bg-white shadow-lg rounded-2xl p-8 max-w-xl w-full text-center">
+        <h1 class="text-3xl font-bold mb-6">Submit a Bug Report</h1>
+
+        <div class="flex justify-center gap-6 py-4">
+            <img width="48" src="{{ url_for('static', filename='images/msfrog.png') }}" alt="frog">
+            <img width="48" src="{{ url_for('static', filename='images/msheart.png') }}" alt="heart">
+            <img width="48" src="{{ url_for('static', filename='images/msbug.png') }}" alt="bug">
+        </div>
+
+        <p class="py-2 text-gray-700">
+            Did you know frogs love bugs? 🐛
+            If you happen to find any within corCTF, submit them here and make our msfrog happy :)
+        </p>
+
+        {% if error %}
+            <div class="bg-red-100 text-red-800 p-3 rounded-lg mb-4">
+                {{ error }}
+            </div>
+        {% endif %}
+
+        <form method="post" action="/" class="space-y-4 mt-4">
+            <input type="text" name="content" maxlength="512" required
+                   class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                   placeholder="Describe the bug... (max 512 chars)">
+            <input type="text" name="name" maxlength="120" required
+                   class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                   placeholder="And tell us your name">
+            <button type="submit"
+                    class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition">
+                Submit
+            </button>
+        </form>
+    </div>
+</body>
+</html>

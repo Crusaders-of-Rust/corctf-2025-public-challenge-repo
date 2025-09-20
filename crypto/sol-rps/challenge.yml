@@ -1,0 +1,32 @@
+name: sol-rps
+author: strellic
+description: |-
+  Personally, I always play rock.
+
+  [Instancer]({{ instancer }})
+
+sortWeight: 30
+flag: corctf{solana_rocks!!_see_what_i_did_there?}
+provide:
+  - sol-rps.tar.gz
+containers:
+  rps:
+    build: chall/challenge
+    ports:
+      - 5001
+    environment:
+      FLAG: corctf{solana_rocks!!_see_what_i_did_there?}
+    resources:
+      limits:
+        memory: 500Mi
+        cpu: 1000m
+      requests:
+        memory: 200Mi
+        cpu: 250m
+expose:
+  rps:
+    - target: 5001
+      tls: sol-rps
+
+instancer:
+  timeout: 600000

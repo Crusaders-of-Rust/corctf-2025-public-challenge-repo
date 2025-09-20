@@ -1,0 +1,26 @@
+name: zenerational-aura 
+author: FizzBuzz101
+flag: corctf{z3n3r@t10n@l_pr3f3tcH!}
+description: |-
+   amd vibes only 🔥 called corctf\_crash kernel folded under zero pressure 🗿
+   zenerational aura loss 💀 couldnt rizz up ring3 🥀 gotta farm that
+   zenerational aura wealth to root ✨
+
+   
+   Note that the kernel is built with the config below at commit of: 8742b2d8935f
+
+   
+   The challenge is hosted on an EPYC 7502P (Zen 2 generation).
+
+   
+   The vmlinux with symbols can be downloaded at: [https://static.cor.team/2025/zen/vmlinux.gz](https://static.cor.team/2025/zen/vmlinux.gz)
+
+
+   Connect to remote and upload your exploit with: `ssh zenerational-aura@i-heart-pwn.ctfi.ng connect $(cat exploit | ssh i-heart-pwn.ctfi.ng upload)`
+sortWeight: 20
+provide:
+  - dist/initramfs.cpio.gz
+  - dist/diff.diff
+  - remote/run.sh
+  - remote/bzImage
+  - config

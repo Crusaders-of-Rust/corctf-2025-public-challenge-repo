@@ -1,0 +1,32 @@
+name: corcoin
+author: strellic
+description: |-
+  Stake your lamports with us and get some corcoin in return!
+
+  [Instancer]({{ instancer }})
+
+sortWeight: 20
+flag: corctf{corcoin_to_the_moooooo0n!!!}
+provide:
+  - corcoin.tar.gz
+containers:
+  rps:
+    build: chall/challenge
+    ports:
+      - 5000
+    environment:
+      FLAG: corctf{corcoin_to_the_moooooo0n!!!}
+    resources:
+      limits:
+        memory: 500Mi
+        cpu: 1000m
+      requests:
+        memory: 200Mi
+        cpu: 250m
+expose:
+  rps:
+    - target: 5000
+      tls: corcoin
+
+instancer:
+  timeout: 600000

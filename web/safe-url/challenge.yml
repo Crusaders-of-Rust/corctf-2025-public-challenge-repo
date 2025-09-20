@@ -1,0 +1,31 @@
+name: safe-url
+author: strellic
+description: |-
+  Using our patented safe-url™ technology, XSS is now impossible!
+
+  {{ link }}
+
+  [Admin Bot]({{ adminbot }})
+sortWeight: 70
+flag:
+  file: flag.txt
+provide:
+  - safe-url.tar.gz
+containers:
+  safeurl:
+    build: chall
+    ports:
+      - 80
+    resources:
+      limits:
+        memory: 250Mi
+        cpu: 500m
+      requests:
+        memory: 50Mi
+        cpu: 100m
+expose:
+  safeurl:
+    - target: 80
+      http: safe-url
+      healthContent: 'safe-url'
+adminbot: adminbot.js

@@ -1,0 +1,14 @@
+name: england
+author: larry
+description: |-
+  🏴󠁧󠁢󠁥󠁮󠁧󠁿
+
+  [Instancer](https://boxman.ctfi.ng/england)
+  
+  [Disk Image](https://static.cor.team/2025/england/england.qcow2.zst)
+sortWeight: 10
+flag: 'corctf{m$_m$_M$_m$_m$_M$_m$_m$_M$_M$_M$_M$_m$}'
+provide:
+  - england.exe
+  - england.tar.gz
+  - run.sh

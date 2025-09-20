@@ -1,0 +1,14 @@
+name: tua-cugina-systems
+author: D3vil
+flag: corctf{https://www.youtube.com/watch?v=2rQ6ELFKejU&corctf2025=1337}
+description: |-
+   The folks at Tua Cugina Systems believe that if a binary isn't listed on GTFObins,
+   then it's safe to slap the SUID bit on it and throw it into an nsjail.
+   They're convinced no one can break out.
+
+   Your mission? Prove them wrong.
+
+   Download the distfiles [here](https://static.cor.team/2025/tua/tua-cugina-local.tar.gz).
+
+   Connect to remote with: `ssh tua-cugina@i-heart-pwn.ctfi.ng`
+sortWeight: 70

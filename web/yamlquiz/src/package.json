@@ -1,0 +1,12 @@
+{
+  "name": "yamlquiz",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.1.0",
+    "yaml": "^2.8.1"
+  }
+}

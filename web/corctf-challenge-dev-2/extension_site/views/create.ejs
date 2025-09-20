@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+	<link rel="stylesheet" href="/css/awsm.min.css">
+    <title>Create | FizzBlock101 Feed Configuration</title>
+</head>
+<body>
+	<%- include('header') %>
+  <h1>Create a New Feed</h1>
+  <form id="feedForm">
+    <div>
+      <label for="name">Name:</label>
+      <input type="text" id="name" name="name" required>
+    </div>
+    <div>
+      <label for="banned-phrases">Banned phrases (as a JSON array):</label>
+      <textarea id="banned-phrases" name="banned-phrases" required></textarea>
+    </div>
+    <button type="submit">Create</button>
+  </form>
+	<script nonce="<%= nonce %>">
+    document.getElementById('feedForm').addEventListener('submit', async (event) => {
+      event.preventDefault();
+      const feed = event.target.name.value;
+      const banned_phrases = event.target['banned-phrases'].value;
+      const response = await fetch('/api/create', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ feed, banned_phrases })
+      });
+      const result = await response.json();
+      if (result.success) {
+        window.location.href = '/feeds';
+      } else {
+        console.error('Error creating feed:', result.error);
+      }
+    });
+  </script>
+</body>
+</html>

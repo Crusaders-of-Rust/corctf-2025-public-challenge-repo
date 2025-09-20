@@ -1,0 +1,36 @@
+name: msbug
+author: jazzpizazz
+description: |-
+  Please use this challenge to report any bugs you may come across while attending corCTF.
+
+  [Instancer]({{ instancer }})
+
+  Please inform our admins once you made a submission:
+  [Admin Bot]({{ adminbot }})
+
+sortWeight: 90
+adminbot: adminbot.js
+flag: corctf{g0tta_h4v3_4n_34sy_msfr0g_ch4ll3ng3}
+provide:
+  - msbug.tar.gz
+
+containers:
+  app:
+    build: app
+    ports:
+      - 5000
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 1Gi
+      requests:
+        cpu: 500m
+        memory: 500Mi
+
+expose:
+  app:
+    - target: 5000
+      http: msbug
+
+instancer:
+  timeout: 300000

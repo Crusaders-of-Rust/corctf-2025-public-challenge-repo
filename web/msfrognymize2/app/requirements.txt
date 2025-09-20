@@ -1,0 +1,13 @@
+opencv-python
+flask
+dlib
+numpy
+cryptography
+pillow
+piexif
+gunicorn
+redisbeat
+celery
+redis
+requests
+celery-redbeat

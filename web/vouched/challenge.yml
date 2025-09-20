@@ -1,0 +1,33 @@
+name: vouched
+author: jazzpizazz
+description: |-
+  The CoR funds have completely dried up and chances are that next year's CTF will be a paid event. To not scare off the CTF players, we have provided some of you with a voucher.
+  Enter them here to grab your free ticket for corCTF 2026!
+  
+  [Instancer]({{ instancer }})
+
+sortWeight: 80
+flag: corctf{d0nt_w0rry_corCTF_2026_w1ll_b3_fr33!}
+provide:
+  - vouched.tar.gz
+
+containers:
+  app:
+    build: app
+    ports:
+      - 8000
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 750Mi
+      requests:
+        cpu: 250m
+        memory: 250Mi
+
+expose:
+  app:
+    - target: 8000
+      http: vouched
+
+instancer:
+  timeout: 600000

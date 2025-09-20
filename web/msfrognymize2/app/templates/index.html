@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>msfrognymize2</title>
+  <link rel="icon" href="{{ url_for('static', filename='img/favicon.ico') }}" type="image/x-icon">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap">
+  <style>
+    :root{
+      --bg: #f9fafb;
+      --panel-bg: #ffffff;
+      --panel-border: rgba(0,0,0,.08);
+      --text: #111827;
+      --muted: #6b7280;
+      --accent: #2563eb;
+      --accent-hover: #1d4ed8;
+      --radius: 12px;
+      --shadow: 0 6px 20px rgba(0,0,0,.1);
+      --gap: 16px;
+    }
+    @media (prefers-color-scheme: dark){
+      :root{
+        --bg: #0f172a;
+        --panel-bg: #1e293b;
+        --panel-border: rgba(255,255,255,.08);
+        --text: #f1f5f9;
+        --muted: #94a3b8;
+        --accent: #3b82f6;
+        --accent-hover: #2563eb;
+        --shadow: 0 6px 24px rgba(0,0,0,.45);
+      }
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; margin: 0; }
+    body{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+      padding: 20px;
+    }
+
+    .container{
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: var(--gap);
+      padding: 28px;
+      width: min(480px, 95vw);
+      background: var(--panel-bg);
+      border: 1px solid var(--panel-border);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    h1{
+      margin: 0;
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 600;
+      color: var(--accent);
+    }
+
+    p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .img{
+      background-image: url("{{ url_for('static', filename='img/img.png') }}");
+      background-repeat: no-repeat;
+      background-position: center;
+      background-size: cover;
+      height: 220px;
+      width: 100%;
+      border-radius: calc(var(--radius) - 2px);
+      box-shadow: 0 3px 14px rgba(0,0,0,.12);
+      border: 1px solid var(--panel-border);
+    }
+
+    form{
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 10px;
+      width: 100%;
+      align-items: center;
+    }
+
+    input[type="file"]{
+      font-family: inherit;
+      font-size: 14px;
+      padding: 8px 10px;
+      border: 1px dashed var(--panel-border);
+      border-radius: 8px;
+      background: transparent;
+      color: var(--text);
+    }
+
+    input[type="submit"]{
+      padding: 10px 16px;
+      background-color: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: transform .08s ease, background-color .15s ease;
+    }
+    input[type="submit"]:hover{ background-color: var(--accent-hover); }
+    input[type="submit"]:active{ transform: translateY(1px) scale(.98); }
+    input[type="submit"]:focus-visible{
+      outline: 2px solid var(--accent);
+      outline-offset: 2px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>msfrognymize 2.0</h1>
+    <div class="img" role="img" aria-label="Preview area"></div>
+    <p>Upload a photo and we protect your privacy</p>
+    <form method="post" enctype="multipart/form-data" action="/">
+      <input type="file" name="file" accept=".jpg,.jpeg" aria-label="Upload a JPEG image">
+      <input type="submit" value="Upload">
+    </form>
+  </div>
+</body>
+</html>

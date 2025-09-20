@@ -1,0 +1,12 @@
+[package]
+name = "server"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+tokio = { version = "1", features = ["full"] }
+prost = "0.11"
+shared = { path = "../shared" }
+anyhow = "1.0.97"
+nix = { version = "0.29.0", features = ["fs"] }
+rand = "0.9.0"

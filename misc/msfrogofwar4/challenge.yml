@@ -1,0 +1,30 @@
+name: msfrogofwar4
+author: strellic
+description: |-
+  The frogs return!
+
+  [Instancer]({{ instancer }})
+sortWeight: 30
+flag: corctf{what_a_superb_match!!}
+provide:
+  - msfrogofwar4.tar.gz
+containers:
+  msfrog:
+    build: chall
+    ports:
+      - 3000
+    environment:
+      FLAG: corctf{what_a_superb_match!!}
+    resources:
+      limits:
+        memory: 500Mi
+        cpu: 1000m
+      requests:
+        memory: 200Mi
+        cpu: 250m
+expose:
+  msfrog:
+    - target: 3000
+      http: msfrogofwar4
+instancer:
+  timeout: 600000

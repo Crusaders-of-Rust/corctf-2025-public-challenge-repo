@@ -1,0 +1,19 @@
+{
+  "name": "fizzblock-c2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.19.2",
+    "express-session": "^1.18.0",
+    "memorystore": "^1.6.7",
+    "websocket": "^1.0.35",
+    "puppeteer": "^22.14.0",
+    "ejs": "^3.1.10"
+  }
+}

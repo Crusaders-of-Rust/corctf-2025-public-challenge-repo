@@ -1,0 +1,1 @@
+API_TOKEN = "corctf{why_4re_pyth0n_jo1n_funt10ns_s0_w3ird?!}"

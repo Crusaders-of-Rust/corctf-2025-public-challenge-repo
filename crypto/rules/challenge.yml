@@ -1,0 +1,31 @@
+name: rules
+author: maxster
+description: |-
+  Make sure to follow the rules!
+
+  `{{ nc }}`
+provide:
+  - file: server.py
+    as: rules.py
+sortWeight: 90
+flag:
+  file: flag.txt
+containers:
+  ruleserver:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    resources:
+      limits:
+        memory: 1000Mi
+        cpu: 3000m
+      requests:
+        memory: 200Mi
+        cpu: 250m
+expose:
+  ruleserver:
+    - target: 5000
+      tcp: 31126
+      healthContent: proof of work

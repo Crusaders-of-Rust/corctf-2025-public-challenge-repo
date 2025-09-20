@@ -1,0 +1,47 @@
+fizzbuzz|corctf-general|why has no one written any challenges yet
+fizzbuzz|corctf-general|anyone who doesn't write a challenge will face a tribunal
+ginkoid|corctf-general|i have a real job sorry
+larry|corctf-general|>yes
+larry|corctf-general|i will write one
+fizzbuzz|corctf-general|why havent you finished it yet
+willwam|spam|a duck walked up to the lemonade stand
+jammy|spam|and he said to the man running the stand
+chop0|spam|hey
+fizzbuzz|spam|got any challenges to write?
+fizzbuzz|spam|corctf CANNOT be 100 weighted with no challenges, get into dev channel
+ryaagard|corctf-general|@strellic i've written my challenge but i need a ton of custom infra for it can you help
+ryaagard|corctf-general|@strellic anything???
+ryaagard|corctf-general|@strellic please we're 10 minutes from starting
+jammy|corctf-general|ryaa you just need to grab his attention better
+ryaagard|corctf-general|how???
+jammy|corctf-general|observe
+jammy|corctf-general|@strellic what osu maps would you recommend i play, i'm looking for a 5*
+strellic|corctf-general|frenz's freedom dive is good, i also like ptv's circles
+ryaagard|corctf-general|@strellic can you do my infra now
+brownie|corctf-general|absolute cinema
+clubby|pwn|i cant believe you'd miss the flag
+clubby|pwn|it was RIGHT there
+pepsipu|pwn|yeah i'm blind gg
+fizzbuzz|pwn|why are you guys playing geoguessr in pwn???
+day|corctf-general|wait so when does corctf acc start
+day|corctf-general|i'll write my challenge once i finish this baba is you game
+fizzbuzz|corctf-general|it's already started???
+day|corctf-general|o lol
+max|corctf-general|ok guys can you just check my solve script works: https://gist.github.com/RealJammy/0a4b9c9165fe59d5b7849d5bf60d0d35
+drakon|corctf-general|@everyone look at this and remember for later: https://gist.github.com/RealJammy/0a4b9c9165fe59d5b7849d5bf60d0d35
+willwam|corctf-general|????
+drakon|corctf-general|wrong server mb
+fizzbuzz|corctf-general|fym wrong server??????
+larry|corctf-general|you are my second least favourite person rn
+plastic|corctf-general|who's first
+chop|off-topic|@clubby have you done the ctf purity test
+clubby|off-topic|UWN, can barely get below 95
+willwam|off-topic|ts pmo
+chop|off-topic|i got 27
+clubby|off-topic|low scores are kinda LHC
+fizzbuzz|off-topic|what are you on about
+willwam|off-topic|dwai
+clubby|off-topic|he doesn't know
+fizzbuzz|rules|Any message containing acronyms will result in the author getting banned.
+willwam|rules|wtf toxic
+corchat|rules|willwam was banned.

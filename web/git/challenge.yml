@@ -1,0 +1,33 @@
+name: git
+author: larry
+description: |-
+  Wait, this isn't git?!
+
+  [Instancer]({{ instancer }})
+
+  [Admin Bot]({{ adminbot }})
+sortWeight: 40
+flag: 'corctf{h0me_r0ll3d_http_what_cou1d_g0_wr0ng?}'
+provide:
+  - handout/Dockerfile
+  - adminbot.js
+containers:
+  safeurl:
+    build: challenge
+    ports:
+      - 8080
+    resources:
+      limits:
+        memory: 250Mi
+        cpu: 500m
+      requests:
+        memory: 50Mi
+        cpu: 100m
+expose:
+  safeurl:
+    - target: 8080
+      http: git
+instancer:
+  timeout: 300000
+adminbot: adminbot.js
+

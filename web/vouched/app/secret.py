@@ -1,0 +1,1 @@
+FLAG = "corctf{d0nt_w0rry_corCTF_2026_w1ll_b3_fr33!}"

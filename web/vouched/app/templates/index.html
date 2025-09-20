@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>corCTF 2026 — Voucher Redeemer</title>
+    <style>
+        :root {
+            --bg: #121212;
+            --panel: #292929;
+            --ring: rgba(90, 200, 250, 0.4);
+            --text: #fff;
+            --muted: #ccc;
+            --accent: #dc3545;
+            --ok: #56E39F;
+            --danger: #dc3545;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        html,
+        body {
+            height: 100%;
+        }
+
+        body {
+            margin: 0;
+            font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial;
+            background: radial-gradient(1200px 800px at 10% 10%, #101a3b 0%, var(--bg) 40%), var(--bg);
+            color: var(--text);
+            display: grid;
+            place-items: center;
+        }
+
+        .card {
+            width: min(720px, 92vw);
+            background: linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.02));
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.35);
+            padding: 28px;
+            backdrop-filter: blur(8px) saturate(130%);
+        }
+
+        h1 {
+            margin: 0 0 6px 0;
+            font-size: 1.6rem;
+            letter-spacing: 0.5px;
+        }
+
+        p.sub {
+            margin: 0 0 20px 0;
+            color: var(--muted);
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .row {
+            display: grid;
+            gap: 12px;
+        }
+
+        input[type="text"] {
+            width: 100%;
+            background: var(--panel);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 14px;
+            padding: 14px 16px;
+            color: var(--text);
+            font-size: 1rem;
+            outline: none;
+            transition: box-shadow 0.2s, border-color 0.2s;
+        }
+
+        input[type="text"]:focus {
+            border-color: var(--accent);
+            box-shadow: 0 0 0 6px var(--ring);
+        }
+
+        button {
+            margin-top: 12px;
+            padding: 12px 18px;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            background: var(--accent);
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        button:hover {
+            background: #AD1F2D;
+        }
+
+        .status {
+            margin-top: 12px;
+            min-height: 24px;
+            font-family: ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+            font-size: 0.95rem;
+            white-space: pre-wrap;
+        }
+
+        .status.ok {
+            color: var(--ok);
+        }
+
+        .status.err {
+            color: var(--danger);
+        }
+
+        .footer {
+            margin-top: 22px;
+            color: var(--muted);
+            font-size: 0.9rem;
+        }
+
+        .hint {
+            opacity: 0.8;
+            font-size: 0.85rem;
+            margin-top: 6px;
+        }
+    </style>
+</head>
+
+<body>
+    <main class="card">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="Logo"
+            style="width:120px; display:block; margin:0 auto 12px;" />
+        <h1>corCTF 2026 — Voucher Redeemer</h1>
+
+
+        <p class="sub">The CoR funds have completely dried up and chances are that next year's CTF will be a paid event.
+            To not scare off the CTF players, we have provided some of you with a voucher.
+            Use the form below to claim your free ticket for corCTF 2026!
+        </p>
+
+        <form id="voucherForm" class="row">
+            <label for="voucher">Voucher code</label>
+            <input id="voucher" type="text" placeholder="e.g. X-XX-XXX-XXX" autocomplete="off" spellcheck="false" />
+            <button type="submit">Verify</button>
+            <div id="status" class="status" aria-live="polite"></div>
+            <div class="hint">Security note: We have <strong>advanced</strong> anti-tampering protection.</div>
+        </form>
+    </main>
+
+    <script>
+        const PBKDF2_ITERATIONS = 1750000;
+        const DKLEN_BITS = 256;
+
+        const form = document.getElementById('voucherForm');
+        const input = document.getElementById('voucher');
+        const statusEl = document.getElementById('status');
+
+        function hex(buf) {
+            const b = new Uint8Array(buf);
+            let s = '';
+            for (let i = 0; i < b.length; i++) s += b[i].toString(16).padStart(2, '0');
+            return s;
+        }
+
+        async function pbkdf2Hex(passwordBytes, saltBytes, iterations, bits) {
+            const keyMat = await crypto.subtle.importKey(
+                'raw', passwordBytes, { name: 'PBKDF2' }, false, ['deriveBits']
+            );
+            const derived = await crypto.subtle.deriveBits(
+                { name: 'PBKDF2', hash: 'SHA-256', salt: saltBytes, iterations },
+                keyMat,
+                bits
+            );
+            return hex(derived);
+        }
+
+        async function computeSignature(voucher) {
+            const enc = new TextEncoder();
+            const password = enc.encode(voucher);
+            const salt = enc.encode(navigator.userAgent);
+            return await pbkdf2Hex(password, salt, PBKDF2_ITERATIONS, DKLEN_BITS);
+        }
+
+        async function verifyVoucher(voucher) {
+            const signature = await computeSignature(voucher);
+            const res = await fetch('/check', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ voucher, signature })
+            });
+            return await res.text();
+        }
+
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const val = input.value.trim();
+            if (!val) return;
+
+            try {
+                statusEl.textContent = 'verifying…';
+                const reply = await verifyVoucher(val);
+                if (reply.startsWith('See you at corCTF 2026')) {
+                    statusEl.className = 'status ok';
+                    statusEl.textContent = reply;
+                } else if (reply === 'code incorrect') {
+                    statusEl.className = 'status err';
+                    statusEl.textContent = reply;
+                } else {
+                    statusEl.className = 'status';
+                    statusEl.textContent = reply;
+                }
+            } catch (e) {
+                statusEl.className = 'status err';
+                statusEl.textContent = 'network error';
+            }
+        });
+    </script>
+</body>
+
+</html>

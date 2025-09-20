@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/css/awsm.min.css">
+	<title><%- name %> | FizzBlock101 Feed Configuration</title>
+</head>
+<body>
+	<%- include('header') %>
+	<h1><%- name %></h1>
+    <p><strong>Feed owner:</strong> <%- feed.owner %></p>
+    <p><strong>Subscribers:</strong>
+      <ul>
+      <% feed.subscribers.forEach((subscriber) => { %>
+        <li><%- subscriber %></li>
+      <% }); %>
+      </ul>
+    <p><strong>Banned phrases:</strong></p>
+      <ul>
+      <% feed.banned_phrases.forEach((phrase) => { %>
+        <li><%- phrase %></li>
+      <% }); %>
+      </ul>
+    <% if (user && user.subscriptions.includes(name)) { %>
+      <button id="subscribe">Unsubscribe</button></br>
+    <% } else if (user) { %>
+      <button id="subscribe">Subscribe</button></br>
+    <% } %>
+    <% if (user && user.username === feed.owner) { %>
+      <a href="/edit/<%= name %>">Edit feed</a></br>
+    <% } %>
+    
+    <a href="/feeds">Back to Feeds</a>
+    
+    <% if (user) {%>
+      <script nonce="<%= nonce %>">
+        const button = document.getElementById('subscribe');
+        const feed = "<%= name %>";
+        button.addEventListener('click', async (event) => {
+          if (button.textContent == "Subscribe") { // this is a *really* stupid way to handle it but im pretty sleepy
+            const response = await fetch('/api/subscribe', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ feed })
+            });
+            const result = await response.json();
+          }
+          else { // better practice is to check == unsubscribe and then let else be some failure case, but who cares
+            const response = await fetch('/api/unsubscribe', {
+              method: 'POST',
+              headers: {
+                'Content-Type': 'application/json'
+              },
+              body: JSON.stringify({ feed })
+            });
+            const result = await response.json();
+            button.textContent = "Subscribe";
+          }
+          location.reload();
+        });
+      </script>
+    <% } %>
+</body>
+</html>

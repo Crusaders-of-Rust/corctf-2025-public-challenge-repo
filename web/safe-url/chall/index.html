@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style>
+    body {
+      font-family: sans-serif; padding-left: 30px; padding-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <h2>safe-url</h2>
+
+  <h4>here are some URLs you should check out!</h4>
+  <ul>
+    <li><a href="https://cor.team">cor.team</a></li>
+    <li><a href="https://ctf.cor.team">ctf.cor.team</a></li>
+    <li><a href="https://example.com">example.com</a></li>
+  </ul>
+
+  <h4>and here are some bad URLs that shouldn't work:</h4>
+  <ul>
+    <li><a href="https://malicious.com">malicious.com</a></li>
+    <li><a href="https://dicega.ng">dicega.ng</a></li>
+    <li><a href="https://cor.team/malicious_page">cor.team/malicious_page</a></li>
+  </ul>
+
+  <h4>try a custom URL!</h4>
+  <form method="GET">
+    <input type="text" name="redirect" placeholder="https://..." style="width: 300px;">
+    <input type="submit" value="Go">
+  </form>
+
+  <script>
+    const safeHostnames = [
+      "cor.team",
+      "example.com",
+      location.hostname
+    ];
+
+    const isSafeHostname = (hostname) => {
+      return safeHostnames.some(safeHostname => hostname === safeHostname || hostname.endsWith(`.${safeHostname}`));
+    };
+
+    function safeRedirect(url) {
+      try {
+        const redirectUrl = new URL(url, window.location.origin);
+
+        if (!isSafeHostname(redirectUrl.hostname)) {
+          alert("hostname is not safe!");
+          return;
+        }
+
+        if (redirectUrl.pathname.length >= 10) {
+          alert("pathname is too long!");
+          return;
+        }
+
+        const safeUrl = `${redirectUrl.protocol}//${redirectUrl.host}${redirectUrl.pathname}`;
+        console.log("redirecting to", safeUrl, "...");
+        window.location = safeUrl;
+      } catch (error) {
+        console.log("error: ", error);
+      }
+    }
+
+    const params = new URLSearchParams(window.location.search);
+    if (params.has('redirect')) {
+      safeRedirect(params.get('redirect'));
+    }
+
+    document.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', (event) => {
+        event.preventDefault();
+        safeRedirect(link.href);
+      });
+    });
+  </script>
+</body>
+</html>

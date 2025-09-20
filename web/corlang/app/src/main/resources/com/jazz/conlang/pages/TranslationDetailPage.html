@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:wicket="http://wicket.apache.org">
+<head>
+    <title>Admin - Translation Detail</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container my-5">
+        <header class="mb-4">
+            <h1 class="text-center">Translation Detail</h1>
+        </header>
+
+        <div class="card p-4 shadow-sm">
+            <p><strong>Key:</strong> <span wicket:id="keyName"></span></p>
+            <p><strong>Locale:</strong> <span wicket:id="locale"></span></p>
+            <p><strong>Proposed Value:</strong> <span wicket:id="proposed"></span></p>
+            <p><strong>Rendered:</strong> <span wicket:id="rendered"></span></p>
+            <p><strong>Approved:</strong> <span wicket:id="approved"></span></p>
+            <p><strong>Author:</strong> <span wicket:id="author"></span></p>
+            
+            <form wicket:id="approvalForm" class="d-flex flex-column gap-2">
+                <input wicket:id="approvalToken" type="password" class="form-control" placeholder="Enter approval token" />
+                <div class="d-flex gap-2">
+                    <button wicket:id="approve" type="submit" class="btn btn-primary">Approve</button>
+                    <button wicket:id="reject" type="submit" class="btn btn-danger">Reject</button>
+                </div>
+            </form>
+
+            <div wicket:id="feedback" class="alert" role="alert"></div>
+        </div>
+    </div>
+</body>
+</html>

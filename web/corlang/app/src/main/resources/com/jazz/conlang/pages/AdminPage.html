@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:wicket>
+<head>
+    <title>Admin - Pending Translations</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body class="bg-light">
+    <div class="container my-5">
+        <header class="mb-4">
+            <h1 class="text-center">Pending Translations</h1>
+        </header>
+
+        <table class="table table-striped table-bordered align-middle">
+            <thead class="table-light">
+                <tr>
+                    <th>Key</th>
+                    <th>Locale</th>
+                    <th>Proposed</th>
+                    <th>Details</th>
+                </tr>
+            </thead>
+            <tbody wicket:id="pendingList">
+                <tr>
+                    <td wicket:id="keyName"></td>
+                    <td wicket:id="locale"></td>
+                    <td wicket:id="proposed"></td>
+                    <td>
+                        <a wicket:id="detail" id="detail" class="btn btn-primary btn-sm">View</a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <p class="mt-4">
+            <a href="/" class="btn btn-outline-secondary">Back to home</a>
+        </p>
+    </div>
+</body>
+</html>

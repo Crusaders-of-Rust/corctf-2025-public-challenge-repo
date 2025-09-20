@@ -1,0 +1,30 @@
+name: sudoku
+author: maxster
+description: |-
+  Just prove to me that you can solve a simple puzzle!
+
+  `{{ nc }}`
+provide:
+  - chall.tar.gz
+sortWeight: 80
+flag:
+  file: flag.txt
+containers:
+  oop:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    resources:
+      limits:
+        memory: 1000Mi
+        cpu: 3000m
+      requests:
+        memory: 200Mi
+        cpu: 250m
+expose:
+  oop:
+    - target: 5000
+      tcp: 31122
+      healthContent: 'flag'

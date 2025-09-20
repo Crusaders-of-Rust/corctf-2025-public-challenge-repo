@@ -1,0 +1,66 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>MsBug Admin</title>
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
+    <script nonce="{{ csp_nonce }}">
+
+        function sleep(time) {
+            return new Promise(resolve => {
+                setTimeout(resolve, time)
+            })
+        }
+
+        async function handleReport(reportId) {
+            await fetch(`/handle/${reportId}`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+            });
+
+            // Give the backend time to update the data
+            await sleep(500);
+            
+            location.reload();
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('#handle-button').forEach(btn => {
+                btn.addEventListener('click', () => handleReport(btn.dataset.reportId));
+            });
+        });
+    </script>
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans p-6">
+    <div class="max-w-2xl mx-auto">
+        <h1 class="text-2xl font-bold mb-4">Bug Reports</h1>
+
+        <ul class="space-y-2">
+            {% for report in reports %}
+            <li class="p-3 bg-white border rounded shadow-sm">
+                <!-- We have a strong CSP + WAF, what could go wrong? -->
+                <span class="text-gray-500">#{{ report['id'] }}</span>: <textarea name="report"
+                    class="w-full bg-gray-100 text-gray-800 border border-gray-300 rounded p-2 resize-none font-mono"
+                    type="text" readonly>{{ report['content'] | safe }}</textarea>
+                {% if report['handled'] %}
+                <div class="text-green-600">(Handled)</div>
+                {% else %}
+                <div class="text-red-600">(Unresolved)</div>
+                <button id="handle-button"
+                    class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded shadow"
+                    data-report-id="{{ report.id }}" {% if report.handled %}disabled
+                    class="bg-gray-400 cursor-not-allowed" {% endif %}>
+                    Handle
+                </button>
+                {% endif %}
+            </li>
+            {% else %}
+            <li>No reports yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

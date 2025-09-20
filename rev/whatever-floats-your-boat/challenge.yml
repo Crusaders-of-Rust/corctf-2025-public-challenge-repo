@@ -1,0 +1,13 @@
+name: whatever-floats-your-boat
+author: maxster
+description: |-
+  row, row, row your boat,
+  gently down the MXCSR Register State
+
+  `./boat_vm float_program.bin`
+provide:
+  - boat_vm
+  - float_program.bin
+sortWeight: 10
+flag:
+  file: flag.txt

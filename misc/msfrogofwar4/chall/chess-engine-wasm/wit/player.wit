@@ -1,0 +1,10 @@
+package corctf:engine;
+
+interface engine {
+    init: func();
+    play: func(fen: string, moves: list<string>) -> string;
+}
+
+world guest {
+    export engine;
+}

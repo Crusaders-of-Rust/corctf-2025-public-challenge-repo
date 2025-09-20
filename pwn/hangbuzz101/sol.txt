@@ -1,0 +1,13 @@
+unshare -Urn
+ip link set dev lo up
+tc qdisc add dev lo root handle 8001: stab linklayer atm overhead 77174400 mtu 1 tsize 1 \
+    fq \
+    limit 1 \
+    flow_limit 1 \
+    buckets 2 \
+    orphan_mask 1 \
+    quantum 1 \
+    maxrate 10bit \
+    low_rate_threshold 1bit
+tc -s -d qdisc show dev lo
+ping -I lo -s1000 -c4 127.0.0.1

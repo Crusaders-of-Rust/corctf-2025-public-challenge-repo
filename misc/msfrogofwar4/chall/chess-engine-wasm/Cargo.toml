@@ -1,0 +1,14 @@
+[package]
+name = "chess-engine-wasm"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+crate-type = ["cdylib"]
+
+[dependencies]
+timecat = { version = "1.45.6", default-features = false, features = ["inbuilt_nnue"] }
+wit-bindgen = "0.45.0"
+
+[build-dependencies]
+wit-bindgen = "0.45.0"

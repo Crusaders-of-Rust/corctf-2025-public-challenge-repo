@@ -1,0 +1,18 @@
+syntax = "proto3";
+
+package pipes;
+
+message EvilClientMessage {
+    optional PlayerMove player_move = 2;
+
+    message PlayerMove {
+        Direction direction = 1;
+        uint32 amount = 2;
+        enum Direction {
+            Up = 0;
+            Right = 1;
+            Down = 2;
+            Left = 3;
+        }
+    }
+}

@@ -1,0 +1,4 @@
+dtttttt R1=6
+dtt     R2=2
+ciiii   MULTIPLY R1 BY R2 FOUR TIMES
+xy PRINT ` SYMBOL AND HALT

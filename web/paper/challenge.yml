@@ -1,0 +1,47 @@
+name: paper
+author: larry
+description: |-
+  Another classic challenge. I hope I haven't left in any cheese.
+
+  [Instancer]({{ instancer }})
+
+sortWeight: 30
+flag: corctf{google_can_do_whatever_it_wants_i_guess}
+provide:
+  - paper.tar.gz
+
+containers:
+  app:
+    build: challenge
+    ports:
+      - 8080
+    resources:
+      limits:
+        cpu: 2000m
+        memory: 4Gi
+      requests:
+        cpu: 500m
+        memory: 500Mi
+    environment:
+      FLAG: corctf{google_can_do_whatever_it_wants_i_guess}
+      VALIDATE: 'true'
+    egress: true
+  redis:
+    build: redis
+    ports:
+      - 6379
+    resources:
+      limits:
+        cpu: 500m
+        memory: 300Mi
+      requests:
+        cpu: 100m
+        memory: 100Mi
+
+expose:
+  app:
+    - target: 8080
+      http: paper
+
+instancer:
+  timeout: 600000

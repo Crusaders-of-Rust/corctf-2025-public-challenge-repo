@@ -1,0 +1,14 @@
+name: bubble
+author: maxster
+description: |-
+  bubbles pop.
+
+  `./bubble_vm program2.txt`
+provide:
+  - bubble_vm
+  - program2.txt
+sortWeight: 41
+flag:
+  file: flag.txt
+
+visible: false

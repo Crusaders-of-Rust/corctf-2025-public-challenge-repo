@@ -1,0 +1,36 @@
+name: touch-grass-3
+author: BrownieInMotion, strellic
+description: |
+  I asked for grass but got [the runaround]({{ url }}).
+
+  Run a mile in ten minutes for the flag! Android-only this year. Please be
+  safe---participation is at your own risk. If you have any health conditions
+  that may be exacerbated by running, do not take part. Don't forget that you
+  can always hack this challenge instead.
+
+  The app collects some data (like location) for purposes of the challenge.
+  Your location data will not be shared.
+sortWeight: 1
+flag: corctf{e8be77aaf9c6ac78876c}
+containers:
+  main:
+    build: .
+    ports:
+      - 3000
+    resources:
+      limits:
+        memory: 512Mi
+        cpu: 500m
+      requests:
+        memory: 512Mi
+        cpu: 500m
+    environment:
+      FLAG: corctf{e8be77aaf9c6ac78876c}
+      PRIV_WEBHOOK_URL: 'REDACTED'
+      WEBHOOK_URL: 'REDACTED'
+expose:
+  main:
+    - target: 3000
+      http: touch-grass-3
+      healthContent: 'viewport'
+

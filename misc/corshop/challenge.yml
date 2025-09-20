@@ -1,0 +1,36 @@
+name: cor.shop
+author: jazzpizazz
+description: |-
+  Who even uses GUIs anymore? As FizzBuzz101 once said so perfectly:
+  “I don't believe in GUI.” People are finally waking up — ordering coffee
+  over SSH, trading bloated Electron editors for the elegance of Neovim.
+
+  At CoR, we couldn't be happier to support this movement. That's why we
+  built a fun little shop you can access right from your terminal, where
+  you can snag personal items from CoR members themselves!
+
+  `{{ nc }}`
+
+sortWeight: 70
+flag: corctf{surpr1s3_1ts_wrapp3d_4nd_fr33}
+
+containers:
+  corshop:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    resources:
+      limits:
+        memory: 200Mi
+        cpu: 300m
+      requests:
+        memory: 50Mi
+        cpu: 100m
+
+expose:
+  corshop:
+    - target: 5000
+      tcp: 31417
+      healthContent: '====================================='

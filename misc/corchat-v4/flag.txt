@@ -1,0 +1,2 @@
+corctf{least_contrived_corctf_challenge}
+

@@ -1,0 +1,31 @@
+name: ssss
+author: wwm
+description: |-
+  [https://www.zkdocs.com/docs/zkdocs/protocol-primitives/alt-shamir/#moving-away-from-the-constant-term](https://www.zkdocs.com/docs/zkdocs/protocol-primitives/alt-shamir/#moving-away-from-the-constant-term)
+
+  `{{ nc }}`
+provide:
+  - file: ./server.py
+    as: ssss.py
+sortWeight: 50
+flag:
+  file: flag.txt
+containers:
+  main:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    resources:
+      limits:
+        memory: 1000Mi
+        cpu: 3000m
+      requests:
+        memory: 200Mi
+        cpu: 250m
+expose:
+  main:
+    - target: 5000
+      tcp: 31555
+      healthContent: 'welcome to ssss'

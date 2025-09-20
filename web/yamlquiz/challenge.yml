@@ -1,0 +1,29 @@
+name: yamlquiz
+author: clubby, strellic
+description: |-
+  How well do you know ~~JSON~~ YAML? Take this quiz and find out!
+
+  {{ link }}
+sortWeight: 100
+flag: corctf{ihateyamlihateyamlihateyaml!!!}
+provide:
+  - file: src/app.js
+    as: yamlquiz.js
+containers:
+  app:
+    build: .
+    ports:
+      - 4455
+    environment:
+      FLAG: corctf{ihateyamlihateyamlihateyaml!!!}
+    resources:
+      limits:
+        memory: 300Mi
+        cpu: 500m
+      requests:
+        memory: 50Mi
+        cpu: 100m
+expose:
+  app:
+    - target: 4455
+      http: yamlquiz

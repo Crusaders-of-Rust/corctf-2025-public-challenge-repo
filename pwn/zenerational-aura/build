@@ -1,0 +1,1 @@
+KBUILD_BUILD_TIMESTAMP='Sun August 15 12:00:00 UTC 2025' KBUILD_BUILD_USER=semigroup KBUILD_BUILD_HOST=haskell make -j`nproc`

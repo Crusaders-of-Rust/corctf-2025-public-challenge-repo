@@ -1,0 +1,29 @@
+name: msfrognymize2
+author: jazzpizazz
+description: |-
+  Last time, our anonymization app had a flaw. We've tightened things up.
+
+  {{ link }}
+
+flag: corctf{why_4re_pyth0n_jo1n_funt10ns_s0_w3ird?!}
+provide:
+  - msfrognymize2.tar.gz
+sortWeight: 50
+containers:
+  app:
+    build: app
+    ports:
+      - 8443
+    resources:
+      limits:
+        cpu: 1000m
+        memory: 2Gi
+      requests:
+        cpu: 500m
+        memory: 1Gi
+expose:
+  app:
+    - target: 8443
+      http: msfrognymize2
+      healthContent: 'msfrognymize'
+

@@ -1,0 +1,23 @@
+{
+  "manifest_version": 3,
+  "name": "fizzblock101 redux",
+  "description": "we're so fizzback",
+  "version": "1.0",
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "js/feed_handler.js"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "js/censor.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "all_frames": true
+    }
+  ]
+}

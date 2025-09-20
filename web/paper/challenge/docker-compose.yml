@@ -1,0 +1,9 @@
+services:
+  redis:
+    image: redis:7-alpine
+    command: redis-server --maxmemory 512M --maxmemory-policy allkeys-lru
+  paper:
+    build: .
+    init: true
+    ports:
+      - 8080:8080

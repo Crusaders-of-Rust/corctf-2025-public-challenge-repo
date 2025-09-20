@@ -1,0 +1,58 @@
+<!doctype html>
+<html>
+
+<head>
+    <title>Latest report by {{ reports[0]['safe_name'] | safe }}</title>
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'none'; 
+        script-src 'nonce-{{ request.csp_nonce }}'; 
+        style-src 'self'; 
+        img-src 'self'; 
+        connect-src 'self'; 
+        font-src 'none'; 
+        frame-ancestors 'none'; 
+        base-uri 'none'; 
+        object-src 'none'; 
+        form-action 'self';
+    ">
+    <link rel="icon" href="{{ url_for('static', filename='images/favicon.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.min.css') }}">
+</head>
+
+<body class="bg-gray-50 text-gray-900 font-sans p-6">
+    <div class="max-w-2xl mx-auto">
+        <h1 class="text-2xl font-bold mb-4">Bug Reports</h1>
+
+        <ul class="space-y-2">
+            {% for report in reports %}
+            <li class="p-3 bg-white border rounded shadow-sm">
+                <span class="text-gray-500">#{{ report['id'] | safe }}</span>:
+                <textarea name="report"
+                    class="w-full bg-gray-100 text-gray-800 border border-gray-300 rounded p-2 resize-none font-mono"
+                    type="text" readonly>{{ report['safe_content'] | safe }}</textarea>
+                <span class="text-gray-500">Created by: {{ report['safe_name'] | safe }}</span>
+            
+                <form action="/handle/{{ report.id }}" method="POST" class="space-y-2 mt-2">
+                    <textarea name="password"
+                        class="w-full bg-gray-100 text-gray-800 border border-gray-300 rounded p-2 resize-none font-mono"
+                        placeholder="password" rows="1"></textarea>
+            
+                    {% if report['handled'] %}
+                    <div class="text-green-600">(Handled)</div>
+                    {% else %}
+                    <div class="text-red-600">(Unresolved)</div>
+                    <button type="submit"
+                        class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-2 px-4 rounded shadow">
+                        Handle
+                    </button>
+                    {% endif %}
+                </form>
+            </li>
+            {% else %}
+            <li>No reports yet.</li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+</html>

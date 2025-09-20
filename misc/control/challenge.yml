@@ -1,0 +1,36 @@
+name: control
+author: chop0
+description: |
+  Design a controller for a digital power supply!
+
+  `{{nc}}`
+
+provide:
+  - ctrl.py
+  - Dockerfile
+
+sortWeight: 45
+flag: corctf{l@yers_0f_c0ntrol_are_fun!}
+
+containers:
+  app:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    resources:
+      requests:
+        cpu: 1000m
+        memory: 50M
+      limits:
+        cpu: 10000m
+        memory: 1Gi
+
+expose:
+  app:
+    - target: 5000
+      tcp: 32727
+      healthContent: 'base64'
+
+

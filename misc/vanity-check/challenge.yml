@@ -1,0 +1,12 @@
+name: vanity-check
+author: jammy, clubby, fizzbuzz
+description: |
+  <img src="https://i.imgur.com/l2LUqyE.jpeg" alt="vanitycheck" style="max-width: 1200px"/>
+
+  Welcome to corCTF!
+  
+  If you'd like to compliment our unidentified Crusader, see all CTF announcements, or complain about challenges not working in support tickets, you should join our [disCoRd](https://discord.gg/4e8zemZe3y)!
+flag: corctf{thanks_for_playing}
+sortWeight: 101
+value: 1
+tiebreakEligible: false

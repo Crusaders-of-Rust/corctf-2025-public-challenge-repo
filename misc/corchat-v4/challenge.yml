@@ -1,0 +1,36 @@
+name: corchat-v4
+author: clubby
+description: |-
+  Chat to the CoR team in our new exclusive chat app!
+
+  Connect and run `corchat` to get started.
+
+  [Instancer]({{ instancer }})
+
+sortWeight: 60
+flag:
+  file: flag.txt
+
+provide:
+  - corchat.tar.gz
+
+containers:
+  corchatv4:
+    build: .
+    ports:
+      - 5000
+    resources:
+      limits:
+        memory: 300Mi
+        cpu: 500m
+      requests:
+        memory: 50Mi
+        cpu: 100m
+
+expose:
+  corchatv4:
+    - target: 5000
+      tls: corchatv4
+
+instancer:
+  timeout: 500000

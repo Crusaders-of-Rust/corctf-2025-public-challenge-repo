@@ -1,0 +1,30 @@
+name: oooo
+author: wwm
+description: |-
+  oooo(o)
+  `{{ nc }}`
+provide:
+  - file: ./server.py
+    as: oooo.py
+sortWeight: 40
+flag:
+  file: flag.txt
+containers:
+  main:
+    build: .
+    ports:
+      - 5000
+    securityContext:
+      privileged: true
+    resources:
+      limits:
+        memory: 1000Mi
+        cpu: 3000m
+      requests:
+        memory: 200Mi
+        cpu: 250m
+expose:
+  main:
+    - target: 5000
+      tcp: 31556
+      healthContent: 'welcome to oooo'

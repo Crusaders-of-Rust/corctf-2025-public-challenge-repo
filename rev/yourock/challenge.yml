@@ -1,0 +1,9 @@
+name: yourock
+author: jazz
+description: |-
+  Forget Enigma, forget Caesar. The only cipher you need is 2009's infamous password dump.
+
+provide:
+  - yourock.tar.gz
+sortWeight: 100
+flag: corctf{r0cky0u_3nc0d1ng_r0cks}

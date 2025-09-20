@@ -1,0 +1,25 @@
+syntax = "proto3";
+
+package pipes;
+
+message ClientMessage {
+    bytes key = 1;
+    optional PlayerMove player_move = 2;
+    optional bool request_maze_state = 3;
+
+    message PlayerMove {
+        Direction direction = 1;
+        uint32 amount = 2;
+        enum Direction {
+            Up = 0;
+            Right = 1;
+            Down = 2;
+            Left = 3;
+        }
+    }
+}
+
+message ServerMessage {
+    string maze_state = 1;
+    optional string flag = 2;
+}

@@ -1,0 +1,10 @@
+package corctf:player;
+
+interface player {
+    init: func();
+    play: func(fen: string, moves: list<string>) -> string;
+}
+
+world guest {
+    export player;
+}

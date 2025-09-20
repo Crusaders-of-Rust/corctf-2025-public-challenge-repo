@@ -1,0 +1,16 @@
+name: roll
+author: maxster
+description: |-
+  Roll with the flow
+
+  wait that's not th right phrase...
+
+  `./roll_vm program2.txt`
+provide:
+  - roll_vm
+  - program1.txt
+sortWeight: 42
+flag:
+  file: flag.txt
+
+visible: false
